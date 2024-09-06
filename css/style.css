@@ -1,3 +1,8 @@
+:root{
+    --primary : #27566B;
+    --button-color : #06293D;
+}
+
 *{
     box-sizing: border-box;
 }
@@ -10,6 +15,7 @@ body{
 .container{
     width: 100%;
     height: 100vh;
+    gap: 1em;
 }
 .dflex{
     display: flex;
@@ -30,6 +36,10 @@ body{
 .dflex.fdc{
     flex-direction: column;
 }
+.dflex.jce{
+        justify-content: flex-end;
+}
+
 
 .flex1{
     flex: 1;
@@ -39,9 +49,263 @@ body{
     flex: 2;
 }
 
+.pos-rel{
+    position: relative;
+}
+.pos-ab{
+    position: absolute;
+}
+button{
+    cursor: pointer;
+}
+.dnone{
+    display: none;
+}
 
 /* ------------------------ */
 .card{
+    width: 40%;
+    height: 60%;
+    min-width: 30em;
+    background-color: var(--primary);
+    border-radius: 1rem;
+    color: white;
+}
+
+.card-head{
+    width: 90%;
+    height: 45%;
+    gap: 1em;
+    border-bottom: 0.1rem solid white ;
+}
+
+.card-head-info{
+    width: 58%;
+    height: 90%;
+
+}
+.info-user{
+    width: 90%;
+    height: 20%;
+    justify-content: space-between;
+    color: white;
+}
+.card-head-img{
+    width: 40%;
+    height: 90%;
+    border-left: 0.1rem solid white ;
+
+}
+.card-head-img img{
+    width: 90%;
+    height: 90%;
+    border-radius: 0.5em;
+}
+
+.card-table{
+    width: 90%;
+    height: 54%;
+    overflow-y: scroll;
+    
+}
+.container-btn{
+    width: 40%;
+    
+}
+.container-btn button{
+    background-color: var(--primary);
+    padding: 0.8em;
+    font-size:0.8rem;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+table{
+    width: 100%;
+    background-color: #799eb0;
+}
+tr,td{
+    text-align: center;
+    /* line-height: 30px; */
+    border: 0.1em solid;
+}
+
+.form.hide{
+    display: none;
+}
+
+tbody
+{
+    max-height: 100px;
+    overflow :scroll;
+}
+
+.container-btn-transaction{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.btn-detail{
+    font-weight: 900;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.modal-ajout{
+    width: 40%;
+    height: 70%;
+    left: 100%;
+    top: 0%;
+    background-color: var(--primary);
+    border-radius: 1rem;
+    color: white;
+    gap: 1.5rem;
+    padding-top: 1em;
+    
+}
+
+.modal-ajout .form-control{
+    width: 90%;
+    height: 15%;
+    gap: 0.1rem;
+   
+    
+}
+.modal-ajout .form-control input, .modal-ajout .form-control select{
+    width: 90%;
+    height: 80%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: none;
+    outline-color: var(--primary);
+    color: var(--button-color);
+    
+}
+
+.modal-ajout .form-control label{
+    align-self: flex-start;
+    padding: 0rem 0.8rem;
+    font-weight: bold;
+}
+.modal-ajout .form-control button{
+    color: white;
+    background-color: var(--button-color);
+    width: 90%;
+    height: 90%;
+    border-radius: 0.3rem;
+    border: 0.1rem white;
+    
+}
+
+.loader{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    opacity: 0.4;
+}
+.loader div{
+    width: 3rem;
+    height: 3rem;
+    align-self: center;
+    border: 0.2em solid #06293D;
+    border-bottom: none;
+    border-radius: 50%;
+    animation: rotate 0.8s linear infinite;
+}
+
+.contain-search{
+    top: 100%;
+    left: 5%;
+    width: 90%;
+    height: auto;
+    background-color: var(--button-color);
+    gap: 0.1em;
+    padding: 0.2em;
+}
+ul li{
+    width: 100%;
+    height: 2em;
+    border-bottom: 1px solid;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+ul li:hover{
+    transform: scale(1.1);
+}
+#search-user{
+    width: 100%;
+    height: 15%;
+}
+
+.contain-input-search{
+    width: 50%;
+    height: 90%;
+}
+.input-search{
+    width: 90%;
+    height: 90%;
+    border: 0.1em solid;
+    margin-right: 0.5em;
+    border-radius: 0.5em;
+    padding: 0.8em;
+    font-size: medium;
+    outline-color: var(--button-color);
+    color:var(--primary);
+    margin: 0.4em;
+}
+#search-user{
+    width: 100%;
+    height: 10%; 
+}
+#search-user-result{
+    top: 50%;
+    left: 3%;
+    height: auto;
+    background-color: var(--button-color);
+    padding: 0.2em;
+}
+#search-user-result li{
+    width: 100%;
+    height: 1em;
+    border-bottom: 0.1em solid;
+    padding: 1.2em;
+}
+#search-user-result li:hover{
+    transform: scale(1.1);
+}
+
+i{
+    cursor: pointer;
+    padding: 0.2em;
+    font-size: 1.3rem;
+}
+
+
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+/* .card{
     height: 50vh;
     width: 40%;
     background-color: #27566B;
@@ -93,9 +357,9 @@ img{
     top: 0;
     left: 100%;
     background-color: #27566B;
-    /* background-color: #06293D;27566B */
+    
 }
-
+/* 
 .form-group{
     margin-bottom: 10px;
 }
@@ -177,10 +441,7 @@ tbody
 
 .fa-plus
 {
-    /* position: absolute;
-    
-    top: 22%;
-    left: 29%; */
+   
     position: relative;
     background-color: #27566B;
    
@@ -316,7 +577,7 @@ tbody
     left: 19%;
     background-color: #27566B;
     color: white;
-    /* visibility:hidden; */
+ 
 }
 
 #modifiericn::after
@@ -403,4 +664,4 @@ tbody
 {
     display: flex;
     flex-direction: column;
-}
+} */
