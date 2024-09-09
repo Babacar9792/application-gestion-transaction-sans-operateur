@@ -286,7 +286,7 @@ export function createUserSearchList(tab,transactionsUser, transactions, users){
     li.id = el.id;
     searchUserResult.appendChild(li);
     li.addEventListener("click", (e)=>{
-      let userRand = users.find(ele => ele.id = e.target.id );
+      let userRand = users.find(ele => ele.id == parseInt(e.target.id) );
       searchUserResult.innerHTML = "";
       
       showUser(userRand, getTransactionByUser(userRand.id, transactionsUser,transactions), transactionsUser)

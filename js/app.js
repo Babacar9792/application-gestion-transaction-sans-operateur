@@ -174,7 +174,6 @@ modalAdd.addEventListener("click", ()=>{
       emailAdd.value="";
       phoneAdd.value="";
       img.src = defaultImg;
-      console.log(users);
       
       showUser(user, [], []);
       modalAjoutAdd.classList.remove("dflex");
