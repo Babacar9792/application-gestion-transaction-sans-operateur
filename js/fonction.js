@@ -1,3 +1,4 @@
+import { users } from "./app.js";
 import { TypeTransaction } from "./constante.js";
 import { nom, prenom, phone, email, solde, userImg, tbody, loader, mtnAdd, destinataireTransaction, code, typeTransaction, searchNumero, searchUserResult } from "./dom.js";
 
@@ -6,9 +7,9 @@ export let currentUser = 0;
 /**
  * Méthode pour afficher les informations d'un utilisateurs
  */
-export function showUser(user, transactions ) {
+export function showUser(user, transactions, transactionsUser ) {
     loader.classList.remove("dnone");
-    var preloadImage = new Image();
+    let preloadImage = new Image();
     preloadImage.src =  user.img;
     preloadImage.onload = function() {
         userImg.src = user.img;
@@ -60,11 +61,19 @@ export function getTransactionByUser(userId, transactionUsers, transactions ){
  * @param {*} transactionUsers list des transactions affecter aux users
  * @param {*} transactions 
  */
-export function showTransactionsUser(user, transactions){
-   tbody.innerHTML = "";
-   code.innerText = transactions.length;
-   transactions.forEach(element => {
-    tbody.appendChild(addLineNewTransaction(element));
+export function showTransactionsUser(user, transactions, transactionsUser){
+          tbody.innerHTML = "";
+          code.innerText = transactions.length;
+          transactions.forEach(element => {
+            tbody.appendChild(addLineNewTransaction(element));
+        });
+
+        let btnCanceled = document.querySelectorAll(".btn-annuler");
+        btnCanceled.forEach(element => {
+          element.addEventListener("click", (e)=>{
+          cancelTransaction(user, transactions.find(el => el.id == e.target.id), transactions, transactionsUser);
+          })
+  
 });
 
 }
@@ -75,6 +84,7 @@ export function showTransactionsUser(user, transactions){
  * @returns 
  */
 function addLineNewTransaction(transaction){
+  isCanceled(transaction);
   let tr = document.createElement("tr");
   let numeroTd = document.createElement("td");
   numeroTd.textContent = transaction.numero;
@@ -91,7 +101,31 @@ function addLineNewTransaction(transaction){
   let montantTd = document.createElement("td");
   montantTd.textContent = transaction.montant;
   tr.appendChild(montantTd);
+
+
+  let action = document.createElement("td");
+  action.innerText = "";
+  if(isCanceled(transaction) && transaction.type == "TRANSFERT"){
+
+    action.innerHTML = `
+        <button type="button" class="btn-annuler " id="${transaction.id}">x</button>` ;
+      }
+    tr.appendChild(action);
+
   return tr;
+  
+}
+
+
+/**
+ * Méthode pour verifier si une transaction peut etre annulé ou pas
+ * @returns boolean
+ */
+function isCanceled(transaction)  {
+  let date = new Date().getTime();
+  let dateTransaction = new Date(transaction.date).getTime();
+  return (date - dateTransaction) < 180000;
+  
   
 }
 
@@ -108,7 +142,6 @@ export function transaction(user, transactions, transactionsUser, userToSend){
             "numero" : generateNumeroTransaction(),
             "destinataire" : destinataireTransaction.value  
           }
-          console.log("new transaction",newTransaction);
           
           doingTransaction(newTransaction, user, transactions, transactionsUser, userToSend)
 }
@@ -153,7 +186,7 @@ function doingTransaction(newTransaction, user,  transactions, transactionsUser,
         transactions.push(newTransaction);
         transactionsUser.push(
           {
-            "id" : 0,
+            "id" : getLastElementInTab(transactionsUser) +  1,
             "user_id" : user.id.toString(),
             "transaction_id" : newTransaction.id.toString()
           }
@@ -206,22 +239,14 @@ function doingTransaction(newTransaction, user,  transactions, transactionsUser,
           );
           // ----------------------
         }
-        console.log("transfert");
-        
       break
       default:
         break;
     }
     solde.textContent = user.solde;
-    showTransactionsUser(user.id, getTransactionByUser(user.id, transactionsUser, transactions))
+    showTransactionsUser(user.id, getTransactionByUser(user.id, transactionsUser, transactions), transactionsUser)
     
-  }
-
-
-  
-  
-
-  
+  } 
 }
 
 
@@ -263,7 +288,52 @@ export function createUserSearchList(tab,transactionsUser, transactions, users){
     li.addEventListener("click", (e)=>{
       let userRand = users.find(ele => ele.id = e.target.id );
       searchUserResult.innerHTML = "";
-      showUser(userRand, getTransactionByUser(userRand.id, transactionsUser,transactions))
+      showUser(userRand, getTransactionByUser(userRand.id, transactionsUser,transactions), transactionsUser)
     })
   })
+}
+
+
+function cancelTransaction(user, transaction, transactions, transactionsUser) {
+
+  /**
+   *  date : Mon Sep 09 2024 09:32:04 GMT+0000 (heure moyenne de Greenwich)
+      destinataire :"(844) 579-2944"
+      id : 3
+      montant :1000
+      numero :"20240909T093204371Z"
+      type : "TRANSFERT"
+   */
+  let currentUser = users.find(usr => usr.id == user);
+  let userDestinataire = users.find(usr => usr.phone == transaction.destinataire);
+  if(userDestinataire == null){
+    alert("Cette utilisateur n'existe plus");
+  }else if(userDestinataire.solde < transaction.montant){
+    alert("Le solde du client destinataire ne permet pas de faire cette opération");
+  }else{
+    currentUser.solde = currentUser.solde + transaction.montant;
+    userDestinataire.solde = userDestinataire.solde - transaction.montant;
+    transaction.type = TypeTransaction.annule;
+    let retrait = {
+      date : new Date(),
+      destinataire :userDestinataire.phone,
+      id : getLastElementInTab(transactions) + 1,
+      montant :transaction.montant,
+      numero :generateNumeroTransaction(),
+      type : TypeTransaction.retrait
+    }
+
+    transactions.push(retrait);
+        transactionsUser.push(
+          {
+            "id" : getLastElementInTab(transactionsUser) +  1,
+            "user_id" : userDestinataire.id.toString(),
+            "transaction_id" : retrait.id.toString()
+          }
+        );
+
+        showTransactionsUser(currentUser, getTransactionByUser(user, transactionsUser, transactions), transactionsUser)
+  }
+
+  
 }

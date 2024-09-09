@@ -2,7 +2,7 @@ import { TypeTransaction } from "./constante.js";
 import { btnShowTransaction, btnUser, destinataireTransaction, doTransaction, inputSearch, modalAjout, searchNumero, searchUserResult } from "./dom.js";
 import { createListSearch, createUserSearchList, currentUser, getRandomUser, getTransactionByUser, searchByPhone, searchUser, showUser, transaction } from "./fonction.js";
 
-let users = [
+export let users = [
         {
           "id": 0,
           "prenom": "Jeannette",
