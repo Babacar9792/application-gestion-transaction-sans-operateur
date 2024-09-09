@@ -8,7 +8,64 @@
     <title>Transaction</title>
 </head>
 <body>
-    <div class="container dflex jcc aic fdc">
+    <div class="container dflex jcc aic fdc pos-rel">
+        <div class="modal-ajout-add pos-ab dflex jcc aic dnone" >
+            <div  class="form-ajout dflex jcc aic fdc" style="text-align: center;">
+                <h4 style="width: 100%;">Ajouter un nouvel utilisateur</h4>
+                <div class="container-info-add dflex jcc aic">
+                    <div class="info-modal-addd">
+                        <div class="form-control-add">
+                            <label for="">Prenom</label>
+                            <input type="text" id="prenom-add">
+                        </div>
+                        <div class="form-control-add">
+                            <label for="">Nom</label>
+                            <input type="text" id="nom-add" >
+                        </div>
+                        <div class="form-control-add">
+                            <label for="">Email</label>
+                            <input type="email" id="email-add" >
+                        </div>
+                        <div class="form-control-add">
+                            <label for="">Téléphone</label>
+                            <input type="text" id="phone-add">
+                        </div>
+                    </div>
+                    <div class="container-img-add">
+                        <label for="charge-img">
+                            <img src="./img/default-img.jpg" alt="" id="img">
+                        </label>
+                        <input type="file" id="charge-img" style="visibility: hidden;" >
+                    </div>
+                </div>
+                <div class="container-button-add dflex jcc aic">
+                        <button id="modal-cancel">Annuler</button>
+                        <button id="modal-add">Confirmer</button>
+                </div>
+
+                <!-- <div class="form-control-add">
+                        <label for="">Prenom</label>
+                        <input type="text" id="prenom-add">
+                    </div>
+                    <div class="form-control-add">
+                        <label for="">Nom</label>
+                        <input type="text" id="nom-add" >
+                    </div>
+                    <div class="form-control-add">
+                        <label for="">Email</label>
+                        <input type="email" id="email-add" >
+                    </div>
+                    <div class="form-control-add">
+                        <label for="">Téléphone</label>
+                        <input type="text" id="phone-add">
+                    </div>
+                    <div class="form-control-add ">
+                        <button id="modal-cancel">Annuler</button>
+                        <button id="modal-add">Confirmer</button>
+                    </div> -->
+            </div>
+                
+        </div>
         <div class="card dflex jcc aic fdc pos-rel"  >
             <div class="loader pos-ab dflex jcc" id="loader">
                     <div >
@@ -22,7 +79,7 @@
                     </div>
                
                         <div class="dflex jcc aic" style="gap: 0.2em; margin-right: 0.5em;">
-                            <i class="fa-solid fa-plus" style="color: #06293D; font-size: larger; font-weight: bold;" title="ajouter un nouvel utilisateur"></i>
+                            <i class="fa-solid fa-plus" id="btn-ajouter" style="color: #06293D; font-size: larger; font-weight: bold;" title="ajouter un nouvel utilisateur"></i>
                             <i class="fa-solid fa-pen-to-square" style="color: #FFD43B;" title="editer cet utilisateur"></i>
                             <i class="fa-solid fa-trash" style="color: red;" title="supprimer cet utilisateur"></i>
                         </div>

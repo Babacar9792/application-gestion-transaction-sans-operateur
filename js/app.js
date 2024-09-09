@@ -1,6 +1,6 @@
 import { TypeTransaction } from "./constante.js";
-import { btnShowTransaction, btnUser, destinataireTransaction, doTransaction, inputSearch, modalAjout, searchNumero, searchUserResult } from "./dom.js";
-import { createListSearch, createUserSearchList, currentUser, getRandomUser, getTransactionByUser, searchByPhone, searchUser, showUser, transaction } from "./fonction.js";
+import { btnAjouter, btnShowTransaction, btnUser, chargeImg, defaultImg, destinataireTransaction, doTransaction, emailAdd, img, inputSearch, modalAdd, modalAjout, modalAjoutAdd, modalCancel, nomAdd, phoneAdd, prenomAdd, searchNumero, searchUserResult, solde } from "./dom.js";
+import { createListSearch, createUserSearchList, currentUser, getLastElementInTab, getRandomUser, getTransactionByUser, searchByPhone, searchUser, showUser, transaction } from "./fonction.js";
 
 export let users = [
         {
@@ -154,3 +154,63 @@ inputSearch.addEventListener("input", (e)=>{
 })
 
 
+modalAdd.addEventListener("click", ()=>{
+    if ((prenomAdd.value == "") || (nomAdd.value== "") || (emailAdd.value== "") || (phoneAdd.value== "") || (img.src == defaultImg)) {
+      alert("Tous les champs sont obligatoire");
+    }else{
+          let user = {
+            "id" : getLastElementInTab(users) + 1,
+            "prenom" : prenomAdd.value,
+            "nom" : nomAdd.value,
+           "email" : emailAdd.value,
+            "phone" : phoneAdd.value,
+            solde : 0,
+            "img" : img.src
+
+      }
+      users.push(user);
+      prenomAdd.value="";
+      nomAdd.value="";
+      emailAdd.value="";
+      phoneAdd.value="";
+      img.src = defaultImg;
+      console.log(users);
+      
+      showUser(user, [], []);
+      modalAjoutAdd.classList.remove("dflex");
+      modalAjoutAdd.classList.add("dnone");
+    }
+    
+})
+
+modalCancel.addEventListener("click", ()=>{
+  modalAjoutAdd.classList.remove("dflex");
+  modalAjoutAdd.classList.add("dnone");
+  prenomAdd.value="";
+  nomAdd.value="";
+  emailAdd.value="";
+  phoneAdd.value="";
+  img.src = defaultImg;
+})
+
+//btnAjouter
+btnAjouter.addEventListener("click", ()=>{
+  modalAjoutAdd.classList.remove("dnone");
+  modalAjoutAdd.classList.add("dflex");
+})
+
+
+chargeImg.addEventListener("change", (e)=>{
+  img.src = e.target.value;
+  if (e.target.files && e.target.files[0]) {
+    let reader = new FileReader();
+    reader.onload = function (el) {
+      img.src = el.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);
+}else{
+  img.src = defaultImg
+}
+
+
+})

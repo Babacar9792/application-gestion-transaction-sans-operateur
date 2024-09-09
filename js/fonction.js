@@ -161,7 +161,7 @@ function generateNumeroTransaction(){
  * @param {*} tab 
  * @returns 
  */
- function getLastElementInTab(tab){
+ export function getLastElementInTab(tab){
      return tab.sort((a,b)=>{
         return b.id - a.id;
       })[0].id;
@@ -274,7 +274,7 @@ export function createListSearch(tab) {
 }
 
 export function searchUser(value,tabUser) {
-  return tabUser.filter(el => ((el.phone.includes(value) || el.prenom.includes(value) || el.nom.includes(value) ||el.email.includes(value)) && value!=""))
+  return tabUser.filter(el => ((el.phone.includes(value.toLowerCase()) || el.prenom.toLowerCase().includes(value.toLowerCase()) || el.nom.toLowerCase().includes(value.toLowerCase()) ||el.email.toLowerCase().includes(value.toLowerCase())) && value!=""))
           .slice(0, 4)
 }
 
@@ -288,6 +288,7 @@ export function createUserSearchList(tab,transactionsUser, transactions, users){
     li.addEventListener("click", (e)=>{
       let userRand = users.find(ele => ele.id = e.target.id );
       searchUserResult.innerHTML = "";
+      
       showUser(userRand, getTransactionByUser(userRand.id, transactionsUser,transactions), transactionsUser)
     })
   })
@@ -295,18 +296,11 @@ export function createUserSearchList(tab,transactionsUser, transactions, users){
 
 
 function cancelTransaction(user, transaction, transactions, transactionsUser) {
-
-  /**
-   *  date : Mon Sep 09 2024 09:32:04 GMT+0000 (heure moyenne de Greenwich)
-      destinataire :"(844) 579-2944"
-      id : 3
-      montant :1000
-      numero :"20240909T093204371Z"
-      type : "TRANSFERT"
-   */
   let currentUser = users.find(usr => usr.id == user);
   let userDestinataire = users.find(usr => usr.phone == transaction.destinataire);
-  if(userDestinataire == null){
+  if(!isCanceled(transaction)){
+      alert("La transaction ne peut plus être annulée");
+  }else if(userDestinataire == null){
     alert("Cette utilisateur n'existe plus");
   }else if(userDestinataire.solde < transaction.montant){
     alert("Le solde du client destinataire ne permet pas de faire cette opération");

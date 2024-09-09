@@ -299,6 +299,107 @@ i{
 }
 
 
+.modal-ajout-add{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #06293d26;
+    border-radius: 0em;
+    z-index: 1;
+
+}
+
+
+
+.form-ajout{
+    min-width: 20em;
+    width: 40%;
+    height: 80%;
+    /* border: 0.1em solid var(--primary); */
+    border-radius: 1em;
+    background-color: white;
+    gap: 0.3em;
+    color: var(--button-color);
+    opacity: 4;
+}
+
+.container-info-add{
+    width: 100%;
+    height: 60%;
+    /* background-color: red; */
+}
+
+.info-modal-addd{
+    width: 55%;
+    height: 100%;
+    /* background-color: green; */
+}
+
+.info-modal-addd .form-control-add{
+    width: 100%;
+    height: 25%;
+    /* border: 0.1em solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 0.3em;
+    color: var(--primary);
+    /* background-color: red; */
+}
+
+.info-modal-addd .form-control-add input{
+    width: 90%;
+    padding: 0.6em;
+    outline-color: var(--primary);
+    border-radius: 0.5em;
+    border: 0.1em solid var(--primary);
+}
+.container-img-add{
+    width: 40%;
+    height: 100%;
+    /* background-color: yellow; */
+}
+.container-img-add label {
+    width:100%;
+    height: 60%;
+    /* background-color: blue; */
+}
+.container-img-add label img{
+    width:100%;
+    height: 60%;
+    margin: 0.1em;
+    border-radius: 1em;
+    cursor: pointer;
+    border: 0.1em solid var(--primary);
+    /* background-color: blue; */
+}
+.container-button-add{
+    width: 100%;
+    height: 15%;
+    /* background-color: #06293D; */
+}
+
+.container-button-add button{
+    width: 40%;
+    height: 70%;
+    border: 0.1em solid white;
+    border-radius: 1em;
+    color: white;
+    
+}
+.container-button-add button:first-child{
+    background-color: red;
+}
+.container-button-add button:last-child{
+    background-color: var(--button-color);
+}
+
+
+
+
+
 
 @keyframes rotate {
     from {
