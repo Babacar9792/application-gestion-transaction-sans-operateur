@@ -1,6 +1,8 @@
 import { TypeTransaction } from "./constante.js";
-import { btnAjouter, btnShowTransaction, btnUser, chargeImg, defaultImg, destinataireTransaction, doTransaction, emailAdd, img, inputSearch, modalAdd, modalAjout, modalAjoutAdd, modalCancel, nomAdd, phoneAdd, prenomAdd, searchNumero, searchUserResult, solde } from "./dom.js";
+import { btnAjouter, btnShowTransaction, btnUser, cancelDelete, chargeImg, confirmDelete, defaultImg, destinataireTransaction, deteleUser, doTransaction, emailAdd, img, inputSearch, modalAdd, modalAjout, modalAjoutAdd, modalAjoutDelete, modalCancel, nomAdd, phoneAdd, prenomAdd, searchNumero, searchUserResult, solde } from "./dom.js";
 import { createListSearch, createUserSearchList, currentUser, getLastElementInTab, getRandomUser, getTransactionByUser, searchByPhone, searchUser, showUser, transaction } from "./fonction.js";
+
+
 
 export let users = [
         {
@@ -212,4 +214,26 @@ chargeImg.addEventListener("change", (e)=>{
 }
 
 
+})
+
+cancelDelete.addEventListener("click", ()=>{
+  modalAjoutDelete.classList.add("dnone");
+  modalAjoutDelete.classList.remove("dflex");
+})
+
+
+confirmDelete.addEventListener("click", ()=>{
+
+  users = users.filter(el => el.id != userRand.id);
+  userRand = getRandomUser(users);
+  showUser(userRand, getTransactionByUser(userRand.id, transactionsUser,transactions))
+  modalAjoutDelete.classList.add("dnone");
+  modalAjoutDelete.classList.remove("dflex");
+
+  
+})
+
+deteleUser.addEventListener("click", ()=>{
+  modalAjoutDelete.classList.remove("dnone");
+  modalAjoutDelete.classList.add("dflex");
 })

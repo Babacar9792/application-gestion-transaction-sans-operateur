@@ -1,6 +1,6 @@
 import { users } from "./app.js";
 import { TypeTransaction } from "./constante.js";
-import { nom, prenom, phone, email, solde, userImg, tbody, loader, mtnAdd, destinataireTransaction, code, typeTransaction, searchNumero, searchUserResult } from "./dom.js";
+import { nom, prenom, phone, email, solde, userImg, tbody, loader, mtnAdd, destinataireTransaction, code, typeTransaction, searchNumero, searchUserResult, defaultImg } from "./dom.js";
 
 export let currentUser = 0;
 
@@ -37,9 +37,14 @@ export function showUser(user, transactions, transactionsUser ) {
  * @returns 
  */
 export function getRandomUser(tableauUsers){
-   let userIds = tableauUsers.map(user => user.id);
-   let randomId = Math.floor(Math.random(0, userIds.length - 1) * userIds.length );
-   return tableauUsers.find(user => user.id == randomId)??tableauUsers[tableauUsers.length - 1];
+  if(tableauUsers.length == 0){
+
+      return {prenom : "...", nom : "...", "email" : "...", phone : "...", solde : 0, id : -1, img : defaultImg}
+  }else{
+    let userIds = tableauUsers.map(user => user.id);
+    let randomId = Math.floor(Math.random(0, userIds.length - 1) * userIds.length );
+    return tableauUsers.find(user => user.id == randomId)??tableauUsers[tableauUsers.length - 1];
+  }
 }
 
 

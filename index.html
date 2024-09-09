@@ -9,7 +9,18 @@
 </head>
 <body>
     <div class="container dflex jcc aic fdc pos-rel">
+        <div class="modal-ajout-delete pos-ab dflex jcc aic dnone" >
+            <div class="card-confirm-delete">
+                <h4 style="text-align: center;">Voulez vous vraiment supprimer cet utilisateur</h4>
+                <div class="contain-btn-del dflex jcc aic">
+                    <button id="cancel-delete">Annuler</button>
+                    <button id="confirm-delete">supprimer</button>
+    
+                </div>
+            </div>
+        </div>
         <div class="modal-ajout-add pos-ab dflex jcc aic dnone" >
+
             <div  class="form-ajout dflex jcc aic fdc" style="text-align: center;">
                 <h4 style="width: 100%;">Ajouter un nouvel utilisateur</h4>
                 <div class="container-info-add dflex jcc aic">
@@ -42,27 +53,6 @@
                         <button id="modal-cancel">Annuler</button>
                         <button id="modal-add">Confirmer</button>
                 </div>
-
-                <!-- <div class="form-control-add">
-                        <label for="">Prenom</label>
-                        <input type="text" id="prenom-add">
-                    </div>
-                    <div class="form-control-add">
-                        <label for="">Nom</label>
-                        <input type="text" id="nom-add" >
-                    </div>
-                    <div class="form-control-add">
-                        <label for="">Email</label>
-                        <input type="email" id="email-add" >
-                    </div>
-                    <div class="form-control-add">
-                        <label for="">Téléphone</label>
-                        <input type="text" id="phone-add">
-                    </div>
-                    <div class="form-control-add ">
-                        <button id="modal-cancel">Annuler</button>
-                        <button id="modal-add">Confirmer</button>
-                    </div> -->
             </div>
                 
         </div>
@@ -81,7 +71,7 @@
                         <div class="dflex jcc aic" style="gap: 0.2em; margin-right: 0.5em;">
                             <i class="fa-solid fa-plus" id="btn-ajouter" style="color: #06293D; font-size: larger; font-weight: bold;" title="ajouter un nouvel utilisateur"></i>
                             <i class="fa-solid fa-pen-to-square" style="color: #FFD43B;" title="editer cet utilisateur"></i>
-                            <i class="fa-solid fa-trash" style="color: red;" title="supprimer cet utilisateur"></i>
+                            <i class="fa-solid fa-trash" id="detele-user" style="color: red;" title="supprimer cet utilisateur"></i>
                         </div>
                
             </div>
